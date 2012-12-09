@@ -124,14 +124,13 @@
 		8463ED8B16742B7100299077 /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 8463ED8A16742B7100299077 /* vec4.c */; };
 		8463ED9016742B7100299077 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8463ED8F16742B7100299077 /* main.m */; };
 		8463ED9316742B7100299077 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8463ED9216742B7100299077 /* AppDelegate.m */; };
-		8463ED9616742B7100299077 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8463ED9516742B7100299077 /* HelloWorldLayer.m */; };
-		8463ED9916742B7100299077 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8463ED9816742B7100299077 /* IntroLayer.m */; };
 		84A3F06516747865008FD528 /* bg_iphone_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F06316747865008FD528 /* bg_iphone_retina.png */; };
 		84A3F06616747865008FD528 /* bg_iphone_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F06416747865008FD528 /* bg_iphone_small.png */; };
 		84A3F06916747870008FD528 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F06816747870008FD528 /* Default.png */; };
 		84A3F06B16747874008FD528 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F06A16747874008FD528 /* Default@2x.png */; };
 		84A3F06E1674794B008FD528 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F06C1674794B008FD528 /* Icon.png */; };
 		84A3F06F1674794B008FD528 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F06D1674794B008FD528 /* Icon@2x.png */; };
+		84A3F07116747B55008FD528 /* target1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F07016747B55008FD528 /* target1.png */; };
 		84A9411316743B140085FBDD /* BG_Simple.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A9411216743B140085FBDD /* BG_Simple.gif */; };
 		84A9411716743B680085FBDD /* PlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A9411616743B680085FBDD /* PlayLayer.m */; };
 		84A94119167466EE0085FBDD /* bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A94118167466EE0085FBDD /* bg-1.png */; };
@@ -392,16 +391,13 @@
 		8463ED8F16742B7100299077 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8463ED9116742B7100299077 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8463ED9216742B7100299077 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8463ED9416742B7100299077 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		8463ED9516742B7100299077 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
-		8463ED9716742B7100299077 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
-		8463ED9816742B7100299077 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		84A3F06316747865008FD528 /* bg_iphone_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_iphone_retina.png; path = Resources/bg_iphone_retina.png; sourceTree = "<group>"; };
 		84A3F06416747865008FD528 /* bg_iphone_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_iphone_small.png; path = Resources/bg_iphone_small.png; sourceTree = "<group>"; };
 		84A3F06816747870008FD528 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		84A3F06A16747874008FD528 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		84A3F06C1674794B008FD528 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
 		84A3F06D1674794B008FD528 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
+		84A3F07016747B55008FD528 /* target1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = target1.png; path = Resources/target1.png; sourceTree = "<group>"; };
 		84A9411216743B140085FBDD /* BG_Simple.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = BG_Simple.gif; path = Resources/BG_Simple.gif; sourceTree = "<group>"; };
 		84A9411516743B680085FBDD /* PlayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayLayer.h; sourceTree = "<group>"; };
 		84A9411616743B680085FBDD /* PlayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayLayer.m; sourceTree = "<group>"; };
@@ -470,10 +466,6 @@
 			children = (
 				8463ED9116742B7100299077 /* AppDelegate.h */,
 				8463ED9216742B7100299077 /* AppDelegate.m */,
-				8463ED9416742B7100299077 /* HelloWorldLayer.h */,
-				8463ED9516742B7100299077 /* HelloWorldLayer.m */,
-				8463ED9716742B7100299077 /* IntroLayer.h */,
-				8463ED9816742B7100299077 /* IntroLayer.m */,
 				8463EC1A16742B6F00299077 /* Resources */,
 				8463EC3416742B6F00299077 /* libs */,
 				8463ED8D16742B7100299077 /* Supporting Files */,
@@ -486,6 +478,7 @@
 		8463EC1A16742B6F00299077 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				84A3F07016747B55008FD528 /* target1.png */,
 				84A3F06C1674794B008FD528 /* Icon.png */,
 				84A3F06D1674794B008FD528 /* Icon@2x.png */,
 				84A3F06316747865008FD528 /* bg_iphone_retina.png */,
@@ -915,6 +908,7 @@
 				84A3F06B16747874008FD528 /* Default@2x.png in Resources */,
 				84A3F06E1674794B008FD528 /* Icon.png in Resources */,
 				84A3F06F1674794B008FD528 /* Icon@2x.png in Resources */,
+				84A3F07116747B55008FD528 /* target1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1027,8 +1021,6 @@
 				8463ED8B16742B7100299077 /* vec4.c in Sources */,
 				8463ED9016742B7100299077 /* main.m in Sources */,
 				8463ED9316742B7100299077 /* AppDelegate.m in Sources */,
-				8463ED9616742B7100299077 /* HelloWorldLayer.m in Sources */,
-				8463ED9916742B7100299077 /* IntroLayer.m in Sources */,
 				84A9411716743B680085FBDD /* PlayLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
