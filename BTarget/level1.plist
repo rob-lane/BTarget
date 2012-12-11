@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Background</key>
+	<string>BG_Simple.gif</string>
+	<key>TargetsAtOnce</key>
+	<integer>1</integer>
+	<key>TargetSpeed</key>
+	<integer>40</integer>
+	<key>TargetLife</key>
+	<integer>5</integer>
+	<key>TargetLayers</key>
+	<array>
+		<dict>
+			<key>PropImage</key>
+			<string>window.png</string>
+			<key>TargetImage</key>
+			<string>target1.png</string>
+			<key>X</key>
+			<string>90</string>
+			<key>Y</key>
+			<string>270</string>
+			<key>Margin</key>
+			<dict>
+				<key>X</key>
+				<integer>4</integer>
+				<key>Y</key>
+				<integer>7</integer>
+				<key>Width</key>
+				<integer>12</integer>
+				<key>Height</key>
+				<integer>10</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PropImage</key>
+			<string>window.png</string>
+			<key>TargetImage</key>
+			<string>target1.png</string>
+			<key>X</key>
+			<string>300</string>
+			<key>Y</key>
+			<string>270</string>
+			<key>Margin</key>
+			<dict>
+				<key>X</key>
+				<integer>4</integer>
+				<key>Y</key>
+				<integer>7</integer>
+				<key>Width</key>
+				<integer>12</integer>
+				<key>Height</key>
+				<integer>10</integer>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "PlayScene.h"
 
 @interface AppController : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 {
 	UIWindow *window_;
 	UINavigationController *navController_;
+    PlayScene *playScene;
+    
 
 	CCDirectorIOS	*director_;							// weak ref
 }

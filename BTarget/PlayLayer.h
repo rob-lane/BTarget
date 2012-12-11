@@ -24,5 +24,7 @@
 
 -(void) fadeInPropWithName: (NSString*)name withDelay:(ccTime)delay;
 
+-(void) testMoveTarget:(ccTime) delay;
+
 
 @end

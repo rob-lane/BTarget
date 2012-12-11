@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842A272F1675587A00B8EA41 /* level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 842A272E1675587A00B8EA41 /* level1.plist */; };
+		842A273216755A3400B8EA41 /* PlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A273116755A3400B8EA41 /* PlayScene.m */; };
+		842A273516755D0A00B8EA41 /* TargetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A273416755D0A00B8EA41 /* TargetLayer.m */; };
+		842A273E1675AD4D00B8EA41 /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A273D1675AD4D00B8EA41 /* Target.m */; };
 		8463EC0816742B6F00299077 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8463EC0716742B6F00299077 /* QuartzCore.framework */; };
 		8463EC0A16742B6F00299077 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8463EC0916742B6F00299077 /* OpenGLES.framework */; };
 		8463EC0C16742B6F00299077 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8463EC0B16742B6F00299077 /* OpenAL.framework */; };
@@ -131,6 +135,7 @@
 		84A3F06E1674794B008FD528 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F06C1674794B008FD528 /* Icon.png */; };
 		84A3F06F1674794B008FD528 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F06D1674794B008FD528 /* Icon@2x.png */; };
 		84A3F07116747B55008FD528 /* target1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A3F07016747B55008FD528 /* target1.png */; };
+		84A3F07C16748F6A008FD528 /* PropertyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3F07B16748F6A008FD528 /* PropertyList.m */; };
 		84A9411316743B140085FBDD /* BG_Simple.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A9411216743B140085FBDD /* BG_Simple.gif */; };
 		84A9411716743B680085FBDD /* PlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A9411616743B680085FBDD /* PlayLayer.m */; };
 		84A94119167466EE0085FBDD /* bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A94118167466EE0085FBDD /* bg-1.png */; };
@@ -139,6 +144,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		842A272E1675587A00B8EA41 /* level1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level1.plist; sourceTree = "<group>"; };
+		842A273016755A3400B8EA41 /* PlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayScene.h; sourceTree = "<group>"; };
+		842A273116755A3400B8EA41 /* PlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayScene.m; sourceTree = "<group>"; };
+		842A273316755D0A00B8EA41 /* TargetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetLayer.h; sourceTree = "<group>"; };
+		842A273416755D0A00B8EA41 /* TargetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetLayer.m; sourceTree = "<group>"; };
+		842A273C1675AD4B00B8EA41 /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
+		842A273D1675AD4D00B8EA41 /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
 		8463EC0316742B6F00299077 /* BTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8463EC0716742B6F00299077 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8463EC0916742B6F00299077 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -398,6 +410,8 @@
 		84A3F06C1674794B008FD528 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
 		84A3F06D1674794B008FD528 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
 		84A3F07016747B55008FD528 /* target1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = target1.png; path = Resources/target1.png; sourceTree = "<group>"; };
+		84A3F07A16748F6A008FD528 /* PropertyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyList.h; sourceTree = "<group>"; };
+		84A3F07B16748F6A008FD528 /* PropertyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyList.m; sourceTree = "<group>"; };
 		84A9411216743B140085FBDD /* BG_Simple.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = BG_Simple.gif; path = Resources/BG_Simple.gif; sourceTree = "<group>"; };
 		84A9411516743B680085FBDD /* PlayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayLayer.h; sourceTree = "<group>"; };
 		84A9411616743B680085FBDD /* PlayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayLayer.m; sourceTree = "<group>"; };
@@ -426,6 +440,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		842A272C1675584700B8EA41 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				842A272E1675587A00B8EA41 /* level1.plist */,
+			);
+			name = Levels;
+			sourceTree = "<group>";
+		};
 		8463EBF816742B6E00299077 = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +486,8 @@
 		8463EC1916742B6F00299077 /* BTarget */ = {
 			isa = PBXGroup;
 			children = (
+				84AD83861677173B00F607FC /* Process */,
+				84A3F07916748F4C008FD528 /* Helpers */,
 				8463ED9116742B7100299077 /* AppDelegate.h */,
 				8463ED9216742B7100299077 /* AppDelegate.m */,
 				8463EC1A16742B6F00299077 /* Resources */,
@@ -471,6 +495,12 @@
 				8463ED8D16742B7100299077 /* Supporting Files */,
 				84A9411516743B680085FBDD /* PlayLayer.h */,
 				84A9411616743B680085FBDD /* PlayLayer.m */,
+				842A273016755A3400B8EA41 /* PlayScene.h */,
+				842A273116755A3400B8EA41 /* PlayScene.m */,
+				842A273316755D0A00B8EA41 /* TargetLayer.h */,
+				842A273416755D0A00B8EA41 /* TargetLayer.m */,
+				842A273C1675AD4B00B8EA41 /* Target.h */,
+				842A273D1675AD4D00B8EA41 /* Target.m */,
 			);
 			path = BTarget;
 			sourceTree = "<group>";
@@ -478,6 +508,7 @@
 		8463EC1A16742B6F00299077 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				842A272C1675584700B8EA41 /* Levels */,
 				84A3F07016747B55008FD528 /* target1.png */,
 				84A3F06C1674794B008FD528 /* Icon.png */,
 				84A3F06D1674794B008FD528 /* Icon@2x.png */,
@@ -841,6 +872,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		84A3F07916748F4C008FD528 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				84A3F07A16748F6A008FD528 /* PropertyList.h */,
+				84A3F07B16748F6A008FD528 /* PropertyList.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		84AD83861677173B00F607FC /* Process */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Process;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -909,6 +956,7 @@
 				84A3F06E1674794B008FD528 /* Icon.png in Resources */,
 				84A3F06F1674794B008FD528 /* Icon@2x.png in Resources */,
 				84A3F07116747B55008FD528 /* target1.png in Resources */,
+				842A272F1675587A00B8EA41 /* level1.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1022,6 +1070,10 @@
 				8463ED9016742B7100299077 /* main.m in Sources */,
 				8463ED9316742B7100299077 /* AppDelegate.m in Sources */,
 				84A9411716743B680085FBDD /* PlayLayer.m in Sources */,
+				84A3F07C16748F6A008FD528 /* PropertyList.m in Sources */,
+				842A273216755A3400B8EA41 /* PlayScene.m in Sources */,
+				842A273516755D0A00B8EA41 /* TargetLayer.m in Sources */,
+				842A273E1675AD4D00B8EA41 /* Target.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

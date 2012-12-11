@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
-#import "PlayLayer.h"
+#import "PlayScene.h"
 
 @implementation AppController
 
@@ -38,7 +38,7 @@
 	[director_ setDisplayStats:YES];
 
 	// set FPS at 60
-	[director_ setAnimationInterval:1.0/60];
+	[director_ setAnimationInterval:0.5/60];
 
 	// attach the openglView to the director
 	[director_ setView:glView];
@@ -73,7 +73,8 @@
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-	[director_ pushScene: [PlayLayer scene]]; 
+    playScene = [[PlayScene alloc] init];
+	[director_ pushScene: playScene]; 
 
 	
 	// Create a Navigation Controller with the Director
@@ -143,9 +144,13 @@
 
 - (void) dealloc
 {
+    if (playScene)
+    {
+        [playScene release];
+        playScene = nil;
+    }
 	[window_ release];
 	[navController_ release];
-
 	[super dealloc];
 }
 @end

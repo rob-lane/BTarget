@@ -44,8 +44,8 @@
     window2.position = ccp(280, 220);
     window2.opacity = 0.0f;
     [self addProp:window2 name:@"window2"];
-    
     [self scheduleOnce:@selector(fadeInPropsWithDelay:) delay:1];
+    [self scheduleOnce:@selector(testMoveTarget:)delay:1.5];
 }
 
 -(void) addProp: (CCSprite *)node name:(NSString *)name
@@ -79,4 +79,11 @@
     [prop runAction:fadeAction];
 }
 
+-(void) testMoveTarget:(ccTime)delay
+{
+ //   CCSprite *targetSprite = [target1 targetSprite];
+   // [self addChild:targetSprite];
+    //targetSprite.position = ccp(120, 180);
+}
+    
 @end
