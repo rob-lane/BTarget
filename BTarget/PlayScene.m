@@ -13,6 +13,7 @@
 -(void) buildLevelFromDictionary:(NSDictionary*) levelCfg;
 -(void) buildBG:(NSString*)bgFile;
 -(void) buildTargetAreaFromDictionary:(NSDictionary*) areaCfg;
+-(void) buildSpritesheet;
 @end
 
 @implementation PlayScene (hidden)
@@ -70,7 +71,10 @@
     if (areaCfg)
     {
         NSString *str_buffer = (NSString*)[areaCfg objectForKey:@"TargetImage"];
-        Target *target = [[Target alloc] initWithFile:str_buffer];
+        BTargetSprite *target = [[BTargetSprite alloc] initWithFile:str_buffer];
+        
+        str_buffer = (NSString*)[areaCfg objectForKey:@"DecoyImage"];
+        BTargetSprite *decoy = [[BTargetSprite alloc] initWithFile:str_buffer];
         
         str_buffer = (NSString*)[areaCfg objectForKey:@"PropImage"];
         CCSprite *prop = [[CCSprite alloc] initWithFile:str_buffer];
@@ -105,7 +109,8 @@
         
         [target setMask:mask];
         [target setEnableMask:YES];
-        TargetLayer* layer = [[TargetLayer alloc] initWithProp:prop andTarget:target];
+        TargetLayer* layer = [[TargetLayer alloc] initWithProp:prop target:target decoy:decoy andSpritesheet:_spriteSheet];
+        [layer setZOrder:0];
         [self addChild:layer];
         if (_targetAreas == nil)
         {
@@ -113,6 +118,14 @@
         }
         [_targetAreas addObject:layer];
     }
+}
+
+-(void) buildSpritesheet
+{
+    _spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"Animations.png"];
+    [_spriteSheet setZOrder:1];
+    [self addChild:_spriteSheet];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"animations.plist" texture:_spriteSheet.texture];
 }
 
 @end
@@ -123,7 +136,7 @@
 -(void) onEnter
 {
     [super onEnter];
-    
+    [self buildSpritesheet];
     [self buildLevel:@"level1"];
     [self schedule:@selector(displayTarget)];
     [self schedule:@selector(checkTarget)];
@@ -135,6 +148,11 @@
     PropertyList *plist = [PropertyList PropertyListWithFile:levelFile];
     NSMutableDictionary *levelCfg = [[NSMutableDictionary alloc] initWithDictionary:[plist readData]];
     [self buildLevelFromDictionary:levelCfg];
+}
+
+-(CCSpriteBatchNode*) getSpritesheet
+{
+    return _spriteSheet;
 }
 
 -(void) dealloc
@@ -153,7 +171,8 @@
 
 -(void) displayTarget
 {
-    if (_displayedTargets == nil || [_displayedTargets count] < _targetsAtOnce)
+    if ( (_displayedTargets == nil || [_displayedTargets count] < _targetsAtOnce)
+        && (_targetAreas.count > 0) )
     {
         if (_displayedTargets == nil)
         {
@@ -183,6 +202,10 @@
             for (TargetLayer *tl in old_tls)
             {
                 [_displayedTargets removeObject:tl];
+                if ( tl.isDestroyed )
+                {
+                    [_targetAreas removeObject:tl];
+                }
             }
         }
     }

@@ -8,20 +8,32 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "Target.h"
+#import "BTargetSprite.h"
 
 @interface TargetLayer : CCLayer { 
-    Target * _target;
+    BTargetSprite * _target;
+    BTargetSprite * _decoy;
     CCSprite *_prop;
+    CGPoint _targetDirection;
+    NSMutableDictionary *_animDictionary;
+    CCSprite *_bullseyeAnimation;
+    CCSprite *_hitAnimation;
+    CCSpriteBatchNode* _spriteSheet;
+    CCAction *_showAction;
     BOOL _displayed;
+    BOOL _destroyed;
+    int _decoyWeight;
 }
--(void) setTarget:(Target*) target;
--(Target*) getTarget;
+-(void) setTarget:(BTargetSprite*) target;
+-(BTargetSprite*) getTarget;
+-(void) setDecoy:(BTargetSprite*) decoy;
+-(BTargetSprite*) getDecoy;
 -(void) setProp:(CCSprite*) prop;
 -(CCSprite*) getProp;
 -(BOOL) isDisplayed;
+-(BOOL) isDestroyed;
 
--(id) initWithProp:(CCSprite*)prop andTarget:(Target*) target;
+-(id) initWithProp:(CCSprite*)prop target:(BTargetSprite*)target decoy:(BTargetSprite*)decoy andSpritesheet:(CCSpriteBatchNode*)spritesheet;
 
 //Show a random target in a random area
 -(void) showTargetForTime:(ccTime)time atSpeed:(float) speed;

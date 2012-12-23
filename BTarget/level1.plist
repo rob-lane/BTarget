@@ -38,10 +38,58 @@
 			<string>window.png</string>
 			<key>TargetImage</key>
 			<string>target1.png</string>
+			<key>DecoyImage</key>
+			<string>smiley.png</string>
 			<key>X</key>
 			<string>300</string>
 			<key>Y</key>
 			<string>270</string>
+			<key>Margin</key>
+			<dict>
+				<key>X</key>
+				<integer>4</integer>
+				<key>Y</key>
+				<integer>7</integer>
+				<key>Width</key>
+				<integer>12</integer>
+				<key>Height</key>
+				<integer>10</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PropImage</key>
+			<string>window.png</string>
+			<key>TargetImage</key>
+			<string>target1.png</string>
+			<key>DecoyImage</key>
+			<string>smiley.png</string>
+			<key>X</key>
+			<string>140</string>
+			<key>Y</key>
+			<string>130</string>
+			<key>Margin</key>
+			<dict>
+				<key>X</key>
+				<integer>4</integer>
+				<key>Y</key>
+				<integer>7</integer>
+				<key>Width</key>
+				<integer>12</integer>
+				<key>Height</key>
+				<integer>10</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PropImage</key>
+			<string>window.png</string>
+			<key>TargetImage</key>
+			<string>target1.png</string>
+			<key>DecoyImage</key>
+			<string>smiley.png</string>
+			<key>X</key>
+			<string>330</string>
+			<key>Y</key>
+			<string>130</string>
 			<key>Margin</key>
 			<dict>
 				<key>X</key>
