@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
 
-@interface ResourceManager : NSObject
+@interface ResourceManager : CCNode 
+@property (readonly) CCSpriteBatchNode *spritesheet;
 
 +(ResourceManager*)sharedResourceManager;
 
-
+-(CCSprite*) spriteWithResourceName:(NSString*)name;
+-(CCSpriteFrame*) spriteFrameWithResourceName:(NSString*)name;
 
 @end

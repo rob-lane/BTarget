@@ -10,6 +10,8 @@
 
 @implementation ResourceManager
 
+@synthesize spritesheet=_spritesheet;
+
 static ResourceManager* _sharedResourceManager;
 
 +(ResourceManager*) sharedResourceManager 
@@ -25,6 +27,28 @@ static ResourceManager* _sharedResourceManager;
         initialized = YES;
         _sharedResourceManager = [[ResourceManager alloc] init];
     }
+}
+
+-(id) init
+{
+    self = [super init];
+    if (self)
+    {
+        _spritesheet = [CCSpriteBatchNode batchNodeWithFile:@"Animations.png"];
+        [self addChild:_spritesheet];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"animations.plist" texture:_spritesheet.texture];
+    }
+    return self;
+}
+
+-(CCSprite*) spriteWithResourceName:(NSString*)name
+{
+    return [CCSprite spriteWithSpriteFrameName:name];
+}
+
+-(CCSpriteFrame*) spriteFrameWithResourceName:(NSString*)name
+{
+    return [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:name];
 }
 
 @end
