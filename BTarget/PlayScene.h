@@ -14,7 +14,6 @@
 @interface PlayScene : CCScene {
     NSMutableArray *_targetAreas;
     NSMutableArray *_displayedTargets;
-    CCSpriteBatchNode *_spriteSheet;
     Player *_player;
     CCSprite *_bg;
     uint _targetSpeed;
@@ -25,7 +24,5 @@
 -(void) buildLevel:(NSString*) levelFile;
 
 -(void) displayTarget;
-
--(CCSpriteBatchNode*) getSpritesheet;
 
 @end

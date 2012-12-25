@@ -14,9 +14,11 @@
 	<array>
 		<dict>
 			<key>PropImage</key>
-			<string>window.png</string>
+			<string>window1</string>
 			<key>TargetImage</key>
-			<string>target1.png</string>
+			<string>target1</string>
+			<key>DecoyImage</key>
+			<string>smiley</string>
 			<key>X</key>
 			<string>90</string>
 			<key>Y</key>
@@ -35,11 +37,11 @@
 		</dict>
 		<dict>
 			<key>PropImage</key>
-			<string>window.png</string>
+			<string>window1</string>
 			<key>TargetImage</key>
-			<string>target1.png</string>
+			<string>target1</string>
 			<key>DecoyImage</key>
-			<string>smiley.png</string>
+			<string>smiley</string>
 			<key>X</key>
 			<string>300</string>
 			<key>Y</key>
@@ -58,11 +60,11 @@
 		</dict>
 		<dict>
 			<key>PropImage</key>
-			<string>window.png</string>
+			<string>window1</string>
 			<key>TargetImage</key>
-			<string>target1.png</string>
+			<string>target1</string>
 			<key>DecoyImage</key>
-			<string>smiley.png</string>
+			<string>smiley</string>
 			<key>X</key>
 			<string>140</string>
 			<key>Y</key>
@@ -81,11 +83,11 @@
 		</dict>
 		<dict>
 			<key>PropImage</key>
-			<string>window.png</string>
+			<string>window1</string>
 			<key>TargetImage</key>
-			<string>target1.png</string>
+			<string>target1</string>
 			<key>DecoyImage</key>
-			<string>smiley.png</string>
+			<string>smiley</string>
 			<key>X</key>
 			<string>330</string>
 			<key>Y</key>

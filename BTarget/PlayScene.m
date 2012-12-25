@@ -8,12 +8,12 @@
 
 #import "PlayScene.h"
 #import "PropertyList.h"
+#import "ResourceManager.h"
 
 @interface PlayScene (hidden)
 -(void) buildLevelFromDictionary:(NSDictionary*) levelCfg;
 -(void) buildBG:(NSString*)bgFile;
 -(void) buildTargetAreaFromDictionary:(NSDictionary*) areaCfg;
--(void) buildSpritesheet;
 @end
 
 @implementation PlayScene (hidden)
@@ -71,13 +71,15 @@
     if (areaCfg)
     {
         NSString *str_buffer = (NSString*)[areaCfg objectForKey:@"TargetImage"];
-        BTargetSprite *target = [[BTargetSprite alloc] initWithFile:str_buffer];
+        CCSpriteFrame *frame_buffer = [[ResourceManager sharedResourceManager] spriteFrameWithResourceName:str_buffer];
+        BTargetSprite *target = [BTargetSprite spriteWithSpriteFrame:frame_buffer];
         
         str_buffer = (NSString*)[areaCfg objectForKey:@"DecoyImage"];
-        BTargetSprite *decoy = [[BTargetSprite alloc] initWithFile:str_buffer];
+        frame_buffer = [[ResourceManager sharedResourceManager] spriteFrameWithResourceName:str_buffer];
+        BTargetSprite *decoy = [BTargetSprite spriteWithSpriteFrame:frame_buffer];
         
         str_buffer = (NSString*)[areaCfg objectForKey:@"PropImage"];
-        CCSprite *prop = [[CCSprite alloc] initWithFile:str_buffer];
+        CCSprite *prop = [[ResourceManager sharedResourceManager] spriteWithResourceName:str_buffer];
         
         CGPoint position = CGPointZero;
         NSNumber *num_buffer = (NSNumber*)[areaCfg objectForKey:@"X"];
@@ -89,7 +91,7 @@
         int targetY = position.y-(prop.contentSize.height/2) - ((prop.contentSize.height/2) + (target.contentSize.height/2));
         CGPoint targetPosition = ccp(position.x, targetY);
         [target setPosition:targetPosition];
-        //[target setPosition:position];
+        [decoy setPosition:targetPosition];
         
         CGRect margin = CGRectZero;
         NSDictionary *margin_cfg = [areaCfg objectForKey:@"Margin"];
@@ -106,26 +108,19 @@
         int maskY = position.y - (prop.contentSize.height/2)+(margin.origin.y);
         CGRect mask = CGRectMake(maskX, maskY, (prop.contentSize.width-margin.size.width), 
                                  (prop.contentSize.height-margin.size.height) );
-        
         [target setMask:mask];
         [target setEnableMask:YES];
-        TargetLayer* layer = [[TargetLayer alloc] initWithProp:prop target:target decoy:decoy andSpritesheet:_spriteSheet];
-        [layer setZOrder:0];
+        [decoy setMask:mask];
+        [decoy setEnableMask:YES];
+        TargetLayer* layer = [[TargetLayer alloc] initWithProp:prop target:target andDecoy:decoy];
         [self addChild:layer];
+        [layer setZOrder:0];
         if (_targetAreas == nil)
         {
             _targetAreas = [[NSMutableArray alloc] init];
         }
         [_targetAreas addObject:layer];
     }
-}
-
--(void) buildSpritesheet
-{
-    _spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"Animations.png"];
-    [_spriteSheet setZOrder:1];
-    [self addChild:_spriteSheet];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"animations.plist" texture:_spriteSheet.texture];
 }
 
 @end
@@ -136,7 +131,7 @@
 -(void) onEnter
 {
     [super onEnter];
-    [self buildSpritesheet];
+    [self addChild:[ResourceManager sharedResourceManager]];
     [self buildLevel:@"level1"];
     [self schedule:@selector(displayTarget)];
     [self schedule:@selector(checkTarget)];
@@ -148,11 +143,6 @@
     PropertyList *plist = [PropertyList PropertyListWithFile:levelFile];
     NSMutableDictionary *levelCfg = [[NSMutableDictionary alloc] initWithDictionary:[plist readData]];
     [self buildLevelFromDictionary:levelCfg];
-}
-
--(CCSpriteBatchNode*) getSpritesheet
-{
-    return _spriteSheet;
 }
 
 -(void) dealloc

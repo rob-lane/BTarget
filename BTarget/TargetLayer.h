@@ -18,10 +18,11 @@
     NSMutableDictionary *_animDictionary;
     CCSprite *_bullseyeAnimation;
     CCSprite *_hitAnimation;
-    CCSpriteBatchNode* _spriteSheet;
+    CCSprite *_decoyAnimation;
     CCAction *_showAction;
     BOOL _displayed;
     BOOL _destroyed;
+    BOOL _isDecoy;
     int _decoyWeight;
 }
 -(void) setTarget:(BTargetSprite*) target;
@@ -32,8 +33,9 @@
 -(CCSprite*) getProp;
 -(BOOL) isDisplayed;
 -(BOOL) isDestroyed;
+-(BOOL) isDecoy;
 
--(id) initWithProp:(CCSprite*)prop target:(BTargetSprite*)target decoy:(BTargetSprite*)decoy andSpritesheet:(CCSpriteBatchNode*)spritesheet;
+-(id) initWithProp:(CCSprite*)prop target:(BTargetSprite*)target andDecoy:(BTargetSprite*)decoy;
 
 //Show a random target in a random area
 -(void) showTargetForTime:(ccTime)time atSpeed:(float) speed;

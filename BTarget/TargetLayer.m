@@ -7,11 +7,12 @@
 //
 
 #import "TargetLayer.h"
+#import "ResourceManager.h"
 
 @interface TargetLayer (hidden)
 -(void) showActionsEnded;
 -(void) loadAnimations;
--(CCAction*) createActionWithName:(NSString*)name frameCount:(int)count delay:(float)time thatRepeats:(BOOL) repeats;
+-(CCSprite*) loadAnimationWithName:(NSString*)name frameCount:(int)count delay:(float) time thatRepeats:(BOOL) repeats;
 -(CCSprite*) randomSpriteForDisplay;
 -(CGPoint) randomDirectionForSprite;
 @end
@@ -25,42 +26,32 @@
 
 -(void) loadAnimations
 {
-    if (_spriteSheet)
+    if (_animDictionary)
     {
-        
-        if (_animDictionary)
-        {
-            [_animDictionary removeAllObjects];
-        }
-        else {
-            _animDictionary = [[NSMutableDictionary alloc] init];
-        }
-        
-        CCAction *action = [self createActionWithName:@"be" frameCount:4 delay:0.1f thatRepeats:NO];
-        _bullseyeAnimation = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@%i", @"be", 1]];
-        [_animDictionary setValue:action forKey:@"be"];
-        [_spriteSheet addChild:_bullseyeAnimation];
-        _bullseyeAnimation.position = _prop.position;
-        _bullseyeAnimation.visible = NO;
-        
-        action = [self createActionWithName:@"he" frameCount:3 delay:0.1f thatRepeats:NO];
-        _hitAnimation = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@%i", @"he", 1]];
-        [_animDictionary setValue:action forKey:@"he"];
-        [_spriteSheet addChild:_hitAnimation];
-        _hitAnimation.position = _prop.position;
-        _hitAnimation.visible = NO;
-        
-        
+        [_animDictionary removeAllObjects];
     }
+    else {
+        _animDictionary = [[NSMutableDictionary alloc] init];
+    }
+    _bullseyeAnimation = [self loadAnimationWithName:@"be" frameCount:4 delay:0.1f thatRepeats:NO];
+    [_bullseyeAnimation setZOrder:1];
+    _hitAnimation = [self loadAnimationWithName:@"he" frameCount:3 delay:0.1f thatRepeats:NO];
+    [_hitAnimation setZOrder:1];
+    _decoyAnimation = [self loadAnimationWithName:@"smiley_touch" frameCount:2 delay:0.5f thatRepeats:YES];
+    [_decoyAnimation setZOrder:1];
 }
 
--(CCAction*) createActionWithName:(NSString*)name frameCount:(int)count delay:(float)time thatRepeats:(BOOL) repeats
+-(CCSprite*) loadAnimationWithName:(NSString*)name frameCount:(int)count delay:(float)time thatRepeats:(BOOL) repeats
 {
     
     NSMutableArray* anim_frames = [NSMutableArray array];
     
     for (int i = 1; i <= count; i++) {
-        [anim_frames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"%@%i", name, i]]];
+        NSString *frame_name = [NSString stringWithFormat:@"%@%i", name, i];
+        CCSpriteFrame* frame = [[ResourceManager sharedResourceManager] spriteFrameWithResourceName:frame_name];
+        if (frame) {
+            [anim_frames addObject:frame];
+        }
     }
     CCAnimation *anim = [CCAnimation animationWithSpriteFrames:anim_frames delay:time];
     CCAction *action = nil;
@@ -70,7 +61,17 @@
     else { 
         action = [CCAnimate actionWithAnimation:anim];
     }
-    return action;
+    
+    NSString *sprite_name = [NSString stringWithFormat:@"%@%i", name, 1];
+    CCSprite *animation = [[ResourceManager sharedResourceManager] spriteWithResourceName:sprite_name];
+    if (_animDictionary) {
+        [_animDictionary setValue:action forKey:name];
+    }
+    [[[ResourceManager sharedResourceManager] spritesheet] addChild:animation];
+    animation.position = _prop.position;
+    animation.visible = NO;
+    
+    return animation;
 }
 
 -(CCSprite*) randomSpriteForDisplay
@@ -86,9 +87,11 @@
     }
     int rand = arc4random_uniform(100);
     if (rand < _decoyWeight) { 
+        _isDecoy = YES;
         return _decoy;
     }
     else { 
+        _isDecoy = NO;
         return _target;
     }   
 }
@@ -134,6 +137,7 @@
         _target = nil;
         _displayed = NO;
         _destroyed = NO;
+        _isDecoy = NO;
         _decoyWeight = 0;
         _targetDirection = CGPointZero;
         self.isTouchEnabled = YES;
@@ -142,14 +146,14 @@
     return self;
 }
 
--(id) initWithProp:(CCSprite*)prop target:(BTargetSprite*)target decoy:(BTargetSprite*)decoy andSpritesheet:(CCSpriteBatchNode*)spritesheet
+-(id) initWithProp:(CCSprite*)prop target:(BTargetSprite*)target andDecoy:(BTargetSprite*)decoy
 {
     self = [super init];
     if(self)
     {
-        _spriteSheet = spritesheet;
         _displayed = NO;
         _destroyed = NO;
+        _isDecoy = NO;
         _decoyWeight = 0;
         _targetDirection = CGPointZero;
         [self setProp:prop];
@@ -169,19 +173,15 @@
         [_animDictionary dealloc];
         _animDictionary = nil;
     }
-    if (_spriteSheet)
+    if (_bullseyeAnimation)
     {
-        if (_bullseyeAnimation)
-        {
-            [_spriteSheet removeChild:_bullseyeAnimation cleanup:YES];
-            _bullseyeAnimation = nil;
-        }
-        if (_hitAnimation)
-        {
-            [_hitAnimation removeChild:_hitAnimation cleanup:YES];
-            _hitAnimation = nil;
-        }
-        _spriteSheet = nil;
+        [[[ResourceManager sharedResourceManager] spritesheet] removeChild:_bullseyeAnimation cleanup:YES];
+        _bullseyeAnimation = nil;
+    }
+    if (_hitAnimation)
+    {
+        [[[ResourceManager sharedResourceManager] spritesheet] removeChild:_hitAnimation cleanup:YES];
+        _hitAnimation = nil;
     }
 }
 
@@ -248,6 +248,11 @@
     return _destroyed;
 }
 
+-(BOOL) isDecoy
+{
+    return _isDecoy;
+}
+
 -(void) registerWithTouchDispatcher
 {
     CCTouchDispatcher *sharedDispatcher = [[CCDirector sharedDirector] touchDispatcher];
@@ -262,57 +267,66 @@
 - (void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint location = [[self parent] convertTouchToNodeSpace:touch];
-    if ([_target doesPointCollide:location] && _animDictionary)
+    BTargetSprite *sprite = (_isDecoy ? _decoy : _target);
+    if ([sprite doesPointCollide:location] && _animDictionary)
     {
-        CCAction *action = nil;
-        CCSprite *anim_sprite = nil;
-        if ([_target isPointBullseye:location]) {
-            action = [_animDictionary objectForKey:@"be"];
-            anim_sprite = _bullseyeAnimation;
-        }
-        else {
-            action = [_animDictionary objectForKey:@"he"]; 
-            anim_sprite = _hitAnimation;
-            anim_sprite.position = location;
-        }
-        if (action && anim_sprite)
-        {
-            [anim_sprite setVisible:YES];
-            [anim_sprite runAction:action];
+        if (_isDecoy) {
+            CCAction *action = [_animDictionary objectForKey:@"smiley_touch"];
             [_target setVisible:NO];
-            id endAction = [CCCallFunc actionWithTarget:self selector:@selector(showActionsEnded)];
-            [_target runAction:endAction];
-            CCFadeOut* fadeExplosion = [CCFadeOut actionWithDuration:1.0f];
-            [anim_sprite runAction:fadeExplosion];
+            [_decoyAnimation setVisible:YES];
+            [_decoyAnimation runAction:action];
             _destroyed = YES;
         }
+        else {
+            CCAction *action = nil;
+            CCSprite *anim_sprite = nil;
+            if ([_target isPointBullseye:location]) {
+                action = [_animDictionary objectForKey:@"be"];
+                anim_sprite = _bullseyeAnimation;
+            }
+            else {
+                action = [_animDictionary objectForKey:@"he"]; 
+                anim_sprite = _hitAnimation;
+                anim_sprite.position = location;
+            }
+            if (action && anim_sprite)
+            {
+                [anim_sprite setVisible:YES];
+                [anim_sprite runAction:action];
+                [_target setVisible:NO];
+                id endAction = [CCCallFunc actionWithTarget:self selector:@selector(showActionsEnded)];
+                [_target runAction:endAction];
+                CCFadeOut* fadeExplosion = [CCFadeOut actionWithDuration:1.0f];
+                [anim_sprite runAction:fadeExplosion];
+                _destroyed = YES;
+            }
+        }
     }
-    
-    
 }
 
 -(void) showTargetForTime:(ccTime)time atSpeed:(float)speed
 {
     BTargetSprite* sprite = (BTargetSprite*)[self randomSpriteForDisplay];
-    if (sprite) {
+    if (sprite && !_displayed) {
+        _displayed = YES;
         CGPoint direction = [self randomDirectionForSprite];
         CGPoint start = _prop.position;
         float distance = 0;
         if (direction.x == 0) { 
             if (direction.y < 0) { 
-                start.y = _prop.position.y + (_prop.contentSize.height/2) + ((_prop.contentSize.height/2) + (_target.contentSize.height/2));
+                start.y = _prop.position.y + (_prop.contentSize.height/2) + ((_prop.contentSize.height/2) + (sprite.contentSize.height/2));
             }
             else { 
-                start.y = _prop.position.y - (_prop.contentSize.height/2) + ((_prop.contentSize.height/2) + (_target.contentSize.height/2));
+                start.y = _prop.position.y - (_prop.contentSize.height/2) - ((_prop.contentSize.height/2) + (sprite.contentSize.height/2));
             }
             distance = abs(_prop.position.y - start.y);
         }
         else if (direction.x < 0) { 
-            start.x = _prop.position.x + (_prop.contentSize.width/2) + ((_prop.contentSize.width/2) + (_target.contentSize.width/2));
+            start.x = _prop.position.x + (_prop.contentSize.width/2) + ((_prop.contentSize.width/2) + (sprite.contentSize.width/2));
             distance = abs(_prop.position.x - start.x);
         }
         else { 
-            start.x = _prop.position.x - (_prop.contentSize.width/2) - ((_prop.contentSize.width/2) + (_target.contentSize.width/2));
+            start.x = _prop.position.x - (_prop.contentSize.width/2) - ((_prop.contentSize.width/2) + (sprite.contentSize.width/2));
             distance = abs(_prop.position.x - start.x);
         }
         sprite.position = start;

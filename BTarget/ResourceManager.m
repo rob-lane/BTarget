@@ -37,6 +37,7 @@ static ResourceManager* _sharedResourceManager;
         _spritesheet = [CCSpriteBatchNode batchNodeWithFile:@"Animations.png"];
         [self addChild:_spritesheet];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"animations.plist" texture:_spritesheet.texture];
+        zOrder_ = 100;
     }
     return self;
 }
