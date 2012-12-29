@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "BTargetSprite.h"
+#import "EventManager.h"
 
-@interface TargetLayer : CCLayer { 
+@interface TargetLayer : CCLayer <EventListener> { 
     BTargetSprite * _target;
     BTargetSprite * _decoy;
     CCSprite *_prop;

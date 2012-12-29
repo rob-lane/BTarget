@@ -14,19 +14,33 @@
 -(id) getType;
 @end
 
+@protocol EventListener <NSObject>
+@required
+-(void) processEvent:(Protocol<Event>*)event;
+@end
+
+typedef Protocol<Event> Event;
+typedef Protocol<EventListener> EventListener;
+
 @interface EventManager : CCNode {
     NSMutableDictionary *_responderMap;
-    //_queueMap[(NSNumber*)queueNumber][NSDictionary*][(id)queueType][(NSMutableArray*)eventArray]
     NSMutableDictionary *_queueMap;
+    NSMutableDictionary *_queueMapBuffer;
     uint _currentQueue;
-    uint _queueSize;
     BOOL _dispatching;
+    
+    //Tweak these for performance of the event manager (not an implicitly performance heavy object).
+    uint _maxDispatchPerFrame;
 }
 
 -(void) queueEvent:(Protocol<Event>*)event;
 
+-(void) registerResponder:(Protocol<EventListener>*)listener forTypeId:(id) typeId;
+
 -(BOOL) isDispatching;
 
-+ (id)sharedManager;
++(EventManager*) sharedEventManager;
+
+-(void) dispatch:(ccTime)dt;
 
 @end

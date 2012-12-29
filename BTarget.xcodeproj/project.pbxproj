@@ -143,6 +143,8 @@
 		84A9411C1674728E0085FBDD /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A9411A1674728D0085FBDD /* splash.png */; };
 		84A9411D1674728E0085FBDD /* window.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A9411B1674728E0085FBDD /* window.png */; };
 		84E3F6AF1688C8B3003B94AD /* ResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3F6AE1688C8B3003B94AD /* ResourceManager.m */; };
+		84E5DD43168E64B400DA7084 /* TouchLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E5DD42168E64B400DA7084 /* TouchLayer.m */; };
+		84E5DD47168E6E7700DA7084 /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E5DD46168E6E7700DA7084 /* EventManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -422,6 +424,10 @@
 		84A9411B1674728E0085FBDD /* window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = window.png; path = Resources/window.png; sourceTree = "<group>"; };
 		84E3F6AD1688C8B3003B94AD /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
 		84E3F6AE1688C8B3003B94AD /* ResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceManager.m; sourceTree = "<group>"; };
+		84E5DD41168E64B400DA7084 /* TouchLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchLayer.h; sourceTree = "<group>"; };
+		84E5DD42168E64B400DA7084 /* TouchLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchLayer.m; sourceTree = "<group>"; };
+		84E5DD45168E6E7700DA7084 /* EventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
+		84E5DD46168E6E7700DA7084 /* EventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,6 +496,8 @@
 		8463EC1916742B6F00299077 /* BTarget */ = {
 			isa = PBXGroup;
 			children = (
+				84E5DD45168E6E7700DA7084 /* EventManager.h */,
+				84E5DD46168E6E7700DA7084 /* EventManager.m */,
 				84A3F07916748F4C008FD528 /* Helpers */,
 				8463ED9116742B7100299077 /* AppDelegate.h */,
 				8463ED9216742B7100299077 /* AppDelegate.m */,
@@ -502,10 +510,10 @@
 				842A273416755D0A00B8EA41 /* TargetLayer.m */,
 				8434DB211686991B00AB88D3 /* BTargetSprite.h */,
 				8434DB221686991B00AB88D3 /* BTargetSprite.m */,
-				842A273C1675AD4B00B8EA41 /* Target.h */,
-				842A273D1675AD4D00B8EA41 /* Target.m */,
 				84E3F6AD1688C8B3003B94AD /* ResourceManager.h */,
 				84E3F6AE1688C8B3003B94AD /* ResourceManager.m */,
+				84E5DD41168E64B400DA7084 /* TouchLayer.h */,
+				84E5DD42168E64B400DA7084 /* TouchLayer.m */,
 			);
 			path = BTarget;
 			sourceTree = "<group>";
@@ -1075,8 +1083,9 @@
 				842A273216755A3400B8EA41 /* PlayScene.m in Sources */,
 				842A273516755D0A00B8EA41 /* TargetLayer.m in Sources */,
 				8434DB231686991B00AB88D3 /* BTargetSprite.m in Sources */,
-				842A273E1675AD4D00B8EA41 /* Target.m in Sources */,
 				84E3F6AF1688C8B3003B94AD /* ResourceManager.m in Sources */,
+				84E5DD43168E64B400DA7084 /* TouchLayer.m in Sources */,
+				84E5DD47168E6E7700DA7084 /* EventManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

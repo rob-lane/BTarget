@@ -8,6 +8,7 @@
 
 #import "TargetLayer.h"
 #import "ResourceManager.h"
+#import "TouchLayer.h"
 
 @interface TargetLayer (hidden)
 -(void) showActionsEnded;
@@ -140,7 +141,6 @@
         _isDecoy = NO;
         _decoyWeight = 0;
         _targetDirection = CGPointZero;
-        self.isTouchEnabled = YES;
         self.zOrder = 0;
     }
     return self;
@@ -160,9 +160,14 @@
         [self setDecoy:decoy];
         [self setTarget:target];
         [self loadAnimations];
-        self.isTouchEnabled = YES;
     }
     return self;
+}
+
+-(void) onEnter
+{
+    [super onEnter];
+    [[EventManager sharedEventManager] registerResponder:(Protocol<EventListener>*)self forTypeId:[TouchEvent getType]];
 }
 
 -(void) dealloc
@@ -253,55 +258,50 @@
     return _isDecoy;
 }
 
--(void) registerWithTouchDispatcher
+-(void) processEvent:(Protocol<Event> *)event
 {
-    CCTouchDispatcher *sharedDispatcher = [[CCDirector sharedDirector] touchDispatcher];
-    [sharedDispatcher addTargetedDelegate:self priority:0 swallowsTouches:NO];
-}
-
-- (BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    return YES;
-}
-
-- (void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    CGPoint location = [[self parent] convertTouchToNodeSpace:touch];
-    BTargetSprite *sprite = (_isDecoy ? _decoy : _target);
-    if ([sprite doesPointCollide:location] && _animDictionary)
-    {
-        if (_isDecoy) {
-            CCAction *action = [_animDictionary objectForKey:@"smiley_touch"];
-            [_target setVisible:NO];
-            [_decoyAnimation setVisible:YES];
-            [_decoyAnimation runAction:action];
-            _destroyed = YES;
-        }
-        else {
-            CCAction *action = nil;
-            CCSprite *anim_sprite = nil;
-            if ([_target isPointBullseye:location]) {
-                action = [_animDictionary objectForKey:@"be"];
-                anim_sprite = _bullseyeAnimation;
-            }
-            else {
-                action = [_animDictionary objectForKey:@"he"]; 
-                anim_sprite = _hitAnimation;
-                anim_sprite.position = location;
-            }
-            if (action && anim_sprite)
-            {
-                [anim_sprite setVisible:YES];
-                [anim_sprite runAction:action];
+    if ([event isKindOfClass:[TouchEvent class]]) {
+        TouchEvent *te = (TouchEvent*)event;
+        UITouch *touch = te.touch;
+        CGPoint location = [[self parent] convertTouchToNodeSpace:touch];
+        BTargetSprite *sprite = (_isDecoy ? _decoy : _target);
+        if ([sprite doesPointCollide:location] && _animDictionary)
+        {
+            if (_isDecoy) {
+                CCAction *action = [_animDictionary objectForKey:@"smiley_touch"];
                 [_target setVisible:NO];
-                id endAction = [CCCallFunc actionWithTarget:self selector:@selector(showActionsEnded)];
-                [_target runAction:endAction];
-                CCFadeOut* fadeExplosion = [CCFadeOut actionWithDuration:1.0f];
-                [anim_sprite runAction:fadeExplosion];
+                [_decoyAnimation setVisible:YES];
+                [_decoyAnimation runAction:action];
                 _destroyed = YES;
             }
+            else {
+                CCAction *action = nil;
+                CCSprite *anim_sprite = nil;
+                if ([_target isPointBullseye:location]) {
+                    action = [_animDictionary objectForKey:@"be"];
+                    anim_sprite = _bullseyeAnimation;
+                }
+                else {
+                    action = [_animDictionary objectForKey:@"he"]; 
+                    anim_sprite = _hitAnimation;
+                    anim_sprite.position = location;
+                }
+                if (action && anim_sprite)
+                {
+                    [anim_sprite setVisible:YES];
+                    [anim_sprite runAction:action];
+                    [_target setVisible:NO];
+                    id endAction = [CCCallFunc actionWithTarget:self selector:@selector(showActionsEnded)];
+                    [_target runAction:endAction];
+                    CCFadeOut* fadeExplosion = [CCFadeOut actionWithDuration:1.0f];
+                    [anim_sprite runAction:fadeExplosion];
+                    _destroyed = YES;
+                }
+            }
         }
+        
     }
+    
 }
 
 -(void) showTargetForTime:(ccTime)time atSpeed:(float)speed

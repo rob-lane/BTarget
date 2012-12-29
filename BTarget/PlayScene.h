@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "Player.h"
 #import "TargetLayer.h"
+#import "TouchLayer.h"
 
 @interface PlayScene : CCScene {
     NSMutableArray *_targetAreas;
@@ -19,6 +20,7 @@
     uint _targetSpeed;
     uint _targetLife;
     uint _targetsAtOnce;
+    TouchLayer *_touchLayer;
 }
 
 -(void) buildLevel:(NSString*) levelFile;

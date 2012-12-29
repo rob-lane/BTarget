@@ -135,7 +135,9 @@
     [self buildLevel:@"level1"];
     [self schedule:@selector(displayTarget)];
     [self schedule:@selector(checkTarget)];
-    
+    _touchLayer = [[TouchLayer alloc] init];
+    [self addChild:_touchLayer];
+    [self addChild:[EventManager sharedEventManager]];
 }
 
 -(void) buildLevel:(NSString *)levelFile
@@ -155,6 +157,11 @@
             [layer release];
         }
         [_targetAreas removeAllObjects];
+    }
+    if (_touchLayer)
+    {
+        [self removeChild:_touchLayer cleanup:YES];
+        _touchLayer = nil;
     }
     [super dealloc];
 }
