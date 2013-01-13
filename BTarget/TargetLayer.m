@@ -78,13 +78,13 @@
 -(CCSprite*) randomSpriteForDisplay
 {
     if (_decoyWeight <= 0) { 
-        _decoyWeight = 10;
+        _decoyWeight = 20;
     }
     else if (_decoyWeight >= 100) { 
-        _decoyWeight = 100;
+        _decoyWeight = 0;
     }
     else { 
-        _decoyWeight += 10;
+        _decoyWeight += 20;
     }
     int rand = arc4random_uniform(100);
     if (rand < _decoyWeight) { 
@@ -272,12 +272,18 @@
         BTargetSprite *sprite = (_isDecoy ? _decoy : _target);
         if ([sprite doesPointCollide:location] && _animDictionary)
         {
+            [_showAction stop];
             if (_isDecoy) {
                 CCAction *action = [_animDictionary objectForKey:@"smiley_touch"];
-                [_target setVisible:NO];
+                [sprite setVisible:NO];
                 [_decoyAnimation setVisible:YES];
+                [_decoyAnimation setPosition:location];
                 [_decoyAnimation runAction:action];
                 _destroyed = YES;
+                id waitAction = [CCDelayTime actionWithDuration:2];
+                id hideAnim = [CCMoveTo actionWithDuration:15 position:location];
+                CCAction *sequence = [CCSequence actions:waitAction, hideAnim, nil];
+                [_decoyAnimation runAction:sequence];
             }
             else {
                 CCAction *action = nil;

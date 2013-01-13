@@ -72,7 +72,7 @@
 {
     if ([event isKindOfClass:[PlayerEvent class]]) {
         PlayerEvent *pe = (PlayerEvent*)event;
-        int newLife = _lives - pe.lifeDelta;
+        int newLife = _lives + pe.lifeDelta;
         
         if (newLife > 0) { 
             _points += pe.pointDelta;
@@ -86,7 +86,7 @@
             int diff = [_lifeIcons count] - _lives;
             while (diff > 0) { 
                 diff--;
-                CCSprite *sprite = [_lifeIcons objectAtIndex:[_lifeIcons count]];
+                CCSprite *sprite = [_lifeIcons objectAtIndex:[_lifeIcons count]-1];
                 sprite.visible = NO;
                 [_lifeIcons removeObject:sprite];
             }

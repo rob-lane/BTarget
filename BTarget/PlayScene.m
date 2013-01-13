@@ -218,7 +218,7 @@
             {
                 PlayerEvent *event = [[PlayerEvent alloc] init];
                 if (tl.isDecoy) {
-                    event.lifeDelta -= 0;
+                    event.lifeDelta -= 1;
                 }
                 else {
                     NSTimeInterval timeDiff = [tl.timeDisplayed timeIntervalSinceNow];
