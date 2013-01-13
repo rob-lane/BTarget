@@ -12,6 +12,7 @@
 @protocol Event <NSObject>
 @required
 -(id) getType;
++(id) getTypeId;
 @end
 
 @protocol EventListener <NSObject>
@@ -44,3 +45,20 @@ typedef Protocol<EventListener> EventListener;
 -(void) dispatch:(ccTime)dt;
 
 @end
+
+/* Event classes */
+@interface PlayerEvent : NSObject <Event>
+
+@property (assign) int pointDelta;
+@property (assign) int lifeDelta;
+
+@end
+
+@interface TouchEvent : NSObject <Event> 
+
+@property (nonatomic, retain) UITouch *touch;
+@property (nonatomic, retain) UIEvent *event;
+@property (assign) BOOL started;
+
+@end
+

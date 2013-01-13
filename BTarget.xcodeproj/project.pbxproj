@@ -13,6 +13,9 @@
 		842A273216755A3400B8EA41 /* PlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A273116755A3400B8EA41 /* PlayScene.m */; };
 		842A273516755D0A00B8EA41 /* TargetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A273416755D0A00B8EA41 /* TargetLayer.m */; };
 		8434DB231686991B00AB88D3 /* BTargetSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434DB221686991B00AB88D3 /* BTargetSprite.m */; };
+		845614A0168F829F00C6ADDD /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456149F168F829F00C6ADDD /* Player.m */; };
+		845614A5169160BB00C6ADDD /* Roughage.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 845614A3169160BB00C6ADDD /* Roughage.fnt */; };
+		845614A6169160BB00C6ADDD /* Roughage.png in Resources */ = {isa = PBXBuildFile; fileRef = 845614A4169160BB00C6ADDD /* Roughage.png */; };
 		8463EC0816742B6F00299077 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8463EC0716742B6F00299077 /* QuartzCore.framework */; };
 		8463EC0A16742B6F00299077 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8463EC0916742B6F00299077 /* OpenGLES.framework */; };
 		8463EC0C16742B6F00299077 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8463EC0B16742B6F00299077 /* OpenAL.framework */; };
@@ -157,6 +160,10 @@
 		842A273416755D0A00B8EA41 /* TargetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetLayer.m; sourceTree = "<group>"; };
 		8434DB211686991B00AB88D3 /* BTargetSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTargetSprite.h; sourceTree = "<group>"; };
 		8434DB221686991B00AB88D3 /* BTargetSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTargetSprite.m; sourceTree = "<group>"; };
+		8456149E168F829F00C6ADDD /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		8456149F168F829F00C6ADDD /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		845614A3169160BB00C6ADDD /* Roughage.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Roughage.fnt; path = Resources/Roughage.fnt; sourceTree = "<group>"; };
+		845614A4169160BB00C6ADDD /* Roughage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Roughage.png; path = Resources/Roughage.png; sourceTree = "<group>"; };
 		8463EC0316742B6F00299077 /* BTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8463EC0716742B6F00299077 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8463EC0916742B6F00299077 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -458,6 +465,15 @@
 			name = Levels;
 			sourceTree = "<group>";
 		};
+		845614A21691609600C6ADDD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				845614A3169160BB00C6ADDD /* Roughage.fnt */,
+				845614A4169160BB00C6ADDD /* Roughage.png */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		8463EBF816742B6E00299077 = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +512,8 @@
 		8463EC1916742B6F00299077 /* BTarget */ = {
 			isa = PBXGroup;
 			children = (
+				8456149E168F829F00C6ADDD /* Player.h */,
+				8456149F168F829F00C6ADDD /* Player.m */,
 				84E5DD45168E6E7700DA7084 /* EventManager.h */,
 				84E5DD46168E6E7700DA7084 /* EventManager.m */,
 				84A3F07916748F4C008FD528 /* Helpers */,
@@ -521,6 +539,7 @@
 		8463EC1A16742B6F00299077 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				845614A21691609600C6ADDD /* Fonts */,
 				8415E3F0167AE54900E5330F /* Animations.png */,
 				8415E3EB167ACEFC00E5330F /* animations.plist */,
 				842A272C1675584700B8EA41 /* Levels */,
@@ -967,6 +986,8 @@
 				842A272F1675587A00B8EA41 /* level1.plist in Resources */,
 				8415E3ED167ACEFC00E5330F /* animations.plist in Resources */,
 				8415E3F1167AE54900E5330F /* Animations.png in Resources */,
+				845614A5169160BB00C6ADDD /* Roughage.fnt in Resources */,
+				845614A6169160BB00C6ADDD /* Roughage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1086,6 +1107,7 @@
 				84E3F6AF1688C8B3003B94AD /* ResourceManager.m in Sources */,
 				84E5DD43168E64B400DA7084 /* TouchLayer.m in Sources */,
 				84E5DD47168E6E7700DA7084 /* EventManager.m in Sources */,
+				845614A0168F829F00C6ADDD /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1142,11 +1164,13 @@
 				GCC_PREFIX_HEADER = BTarget/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"BTarget/libs/kazmath/include\"";
 				INFOPLIST_FILE = BTarget/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1160,11 +1184,13 @@
 				GCC_PREFIX_HEADER = BTarget/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"BTarget/libs/kazmath/include\"";
 				INFOPLIST_FILE = BTarget/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

@@ -23,8 +23,10 @@
     CCAction *_showAction;
     BOOL _displayed;
     BOOL _destroyed;
+    BOOL _bullseyeHit;
     BOOL _isDecoy;
     int _decoyWeight;
+    NSDate* _timeDisplayed;
 }
 -(void) setTarget:(BTargetSprite*) target;
 -(BTargetSprite*) getTarget;
@@ -35,6 +37,8 @@
 -(BOOL) isDisplayed;
 -(BOOL) isDestroyed;
 -(BOOL) isDecoy;
+@property (readonly) NSDate* timeDisplayed;
+@property (readonly) BOOL bullseyeHit;
 
 -(id) initWithProp:(CCSprite*)prop target:(BTargetSprite*)target andDecoy:(BTargetSprite*)decoy;
 

@@ -10,16 +10,6 @@
 #import "cocos2d.h"
 #import "EventManager.h"
 
-@interface TouchEvent : NSObject <Event> 
-
-@property (nonatomic, retain) UITouch *touch;
-@property (nonatomic, retain) UIEvent *event;
-@property (assign) BOOL started;
-
-+(id) getType;
-
-@end
-
 @interface TouchLayer : CCLayer {
     
 }

@@ -174,3 +174,41 @@ static EventManager* _sharedEventManager;
 }
 
 @end
+
+
+/* Event classes */
+@implementation PlayerEvent
+
+@synthesize pointDelta=_pointDelta;
+@synthesize lifeDelta=_lifeDelta;
+
+-(id) getType
+{
+    return [PlayerEvent getTypeId];
+}
+
++(id) getTypeId
+{
+    return (id)[NSString stringWithString:@"player"];
+}
+
+@end
+
+@implementation TouchEvent
+
+@synthesize touch;
+@synthesize event;
+@synthesize started;
+
+-(id) getType
+{
+    return [TouchEvent getTypeId];
+}
+
++(id) getTypeId { 
+    return (id)[NSString stringWithString:@"touch"];
+}
+
+@end
+
+

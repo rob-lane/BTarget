@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
+#import "EventManager.h"
 
-@interface Player : NSObject
+@interface Player : CCLayer <EventListener> { 
+    NSMutableArray* _lifeIcons;
+    CCLabelBMFont* _scoreLabel;
+}
 
 @property (readonly) int lives;
 @property (readonly) int points;

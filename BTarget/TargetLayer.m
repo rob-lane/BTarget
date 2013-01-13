@@ -129,6 +129,9 @@
 
 @implementation TargetLayer
 
+@synthesize timeDisplayed;
+@synthesize bullseyeHit;
+
 -(id) init
 {
     self = [super init];
@@ -139,6 +142,7 @@
         _displayed = NO;
         _destroyed = NO;
         _isDecoy = NO;
+        _bullseyeHit = NO;
         _decoyWeight = 0;
         _targetDirection = CGPointZero;
         self.zOrder = 0;
@@ -154,6 +158,7 @@
         _displayed = NO;
         _destroyed = NO;
         _isDecoy = NO;
+        _bullseyeHit = NO;
         _decoyWeight = 0;
         _targetDirection = CGPointZero;
         [self setProp:prop];
@@ -167,7 +172,7 @@
 -(void) onEnter
 {
     [super onEnter];
-    [[EventManager sharedEventManager] registerResponder:(Protocol<EventListener>*)self forTypeId:[TouchEvent getType]];
+    [[EventManager sharedEventManager] registerResponder:(Protocol<EventListener>*)self forTypeId:[TouchEvent getTypeId]];
 }
 
 -(void) dealloc
@@ -280,11 +285,13 @@
                 if ([_target isPointBullseye:location]) {
                     action = [_animDictionary objectForKey:@"be"];
                     anim_sprite = _bullseyeAnimation;
+                    _bullseyeHit = YES;
                 }
                 else {
                     action = [_animDictionary objectForKey:@"he"]; 
                     anim_sprite = _hitAnimation;
                     anim_sprite.position = location;
+                    _bullseyeHit = NO;
                 }
                 if (action && anim_sprite)
                 {
@@ -308,6 +315,8 @@
 {
     BTargetSprite* sprite = (BTargetSprite*)[self randomSpriteForDisplay];
     if (sprite && !_displayed) {
+        _timeDisplayed = [NSDate date];
+        [_timeDisplayed retain];
         _displayed = YES;
         CGPoint direction = [self randomDirectionForSprite];
         CGPoint start = _prop.position;

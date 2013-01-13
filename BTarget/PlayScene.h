@@ -17,6 +17,8 @@
     NSMutableArray *_displayedTargets;
     Player *_player;
     CCSprite *_bg;
+    uint _maxBullseyeValue;
+    uint _maxTargetValue;
     uint _targetSpeed;
     uint _targetLife;
     uint _targetsAtOnce;

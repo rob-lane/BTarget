@@ -11,12 +11,22 @@
 #import "ResourceManager.h"
 
 @interface PlayScene (hidden)
+-(void) buildPlayer;
 -(void) buildLevelFromDictionary:(NSDictionary*) levelCfg;
 -(void) buildBG:(NSString*)bgFile;
 -(void) buildTargetAreaFromDictionary:(NSDictionary*) areaCfg;
 @end
 
 @implementation PlayScene (hidden)
+-(void) buildPlayer
+{
+    if (_player == nil)
+    {
+        _player = [[Player alloc] init];
+    }
+    [self addChild:_player];
+    [_player setZOrder:3];
+}
 
 -(void) buildLevelFromDictionary:(NSDictionary *)levelCfg
 {
@@ -49,6 +59,16 @@
             {
                 [self buildTargetAreaFromDictionary:cfg];
             }
+        }
+        else if ([key compare:@"BullseyeMaxValue"] == NSOrderedSame)
+        {
+            NSNumber *value = (NSNumber*)[levelCfg objectForKey:key];
+            _maxBullseyeValue = value.intValue;
+        }
+        else if ([key compare:@"TargetMaxValue"] == NSOrderedSame)
+        {
+            NSNumber *value = (NSNumber*)[levelCfg objectForKey:key];
+            _maxTargetValue = value.intValue;
         }
     }
 }
@@ -132,6 +152,7 @@
 {
     [super onEnter];
     [self addChild:[ResourceManager sharedResourceManager]];
+    [self buildPlayer];
     [self buildLevel:@"level1"];
     [self schedule:@selector(displayTarget)];
     [self schedule:@selector(checkTarget)];
@@ -191,6 +212,24 @@
         {
             if (tl.isDisplayed == NO)
             {
+                [old_tls addObject:tl];
+            }
+            else if (tl.isDestroyed == YES)
+            {
+                PlayerEvent *event = [[PlayerEvent alloc] init];
+                if (tl.isDecoy) {
+                    event.lifeDelta -= 0;
+                }
+                else {
+                    NSTimeInterval timeDiff = [tl.timeDisplayed timeIntervalSinceNow];
+                    if (tl.bullseyeHit) { 
+                        event.pointDelta = _maxBullseyeValue - (timeDiff * _maxBullseyeValue);
+                    }
+                    else { 
+                        event.pointDelta = _maxTargetValue - (timeDiff * _maxTargetValue);
+                    }
+                }
+                [[EventManager sharedEventManager] queueEvent:(Protocol<Event>*)event];
                 [old_tls addObject:tl];
             }
         }

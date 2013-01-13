@@ -4,6 +4,10 @@
 <dict>
 	<key>Background</key>
 	<string>BG_Simple.gif</string>
+	<key>BullseyeMaxValue</key>
+	<integer>100</integer>
+	<key>TargetMaxValue</key>
+	<string>35</string>
 	<key>TargetsAtOnce</key>
 	<integer>1</integer>
 	<key>TargetSpeed</key>

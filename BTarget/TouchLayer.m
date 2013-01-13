@@ -8,22 +8,6 @@
 
 #import "TouchLayer.h"
 
-@implementation TouchEvent
-
-@synthesize touch;
-@synthesize event;
-@synthesize started;
-
-+(id) getType { 
-    return (id)[NSString stringWithString:@"touch"];
-}
-
--(id) getType {
-    return [TouchEvent getType];
-}
-
-@end
-
 @interface TouchLayer (hidden)
 
 -(Protocol<Event>*) eventWithTouch:(UITouch*)touch andUIEvent:(UIEvent*)event isEnding:(BOOL)ending; 
@@ -43,8 +27,6 @@
 }
 
 @end
-    
-
 
 @implementation TouchLayer
 
