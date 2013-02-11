@@ -40,6 +40,8 @@
 @property (readonly) NSDate* timeDisplayed;
 @property (readonly) BOOL bullseyeHit;
 
++(TargetLayer*) targetLayerWithDefinition:(NSDictionary*)definition;
+
 -(id) initWithProp:(CCSprite*)prop target:(BTargetSprite*)target andDecoy:(BTargetSprite*)decoy;
 
 //Show a random target in a random area

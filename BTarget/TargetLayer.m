@@ -169,6 +169,54 @@
     return self;
 }
 
++(TargetLayer*) targetLayerWithDefinition:(NSDictionary*)definition
+{
+    NSString *str_buffer = (NSString*)[definition objectForKey:@"TargetImage"];
+    CCSpriteFrame *frame_buffer = [[ResourceManager sharedResourceManager] spriteFrameWithResourceName:str_buffer];
+    BTargetSprite *target = [BTargetSprite spriteWithSpriteFrame:frame_buffer];
+    
+    str_buffer = (NSString*)[definition objectForKey:@"DecoyImage"];
+    frame_buffer = [[ResourceManager sharedResourceManager] spriteFrameWithResourceName:str_buffer];
+    BTargetSprite *decoy = [BTargetSprite spriteWithSpriteFrame:frame_buffer];
+    
+    str_buffer = (NSString*)[definition objectForKey:@"PropImage"];
+    CCSprite *prop = [[ResourceManager sharedResourceManager] spriteWithResourceName:str_buffer];
+    
+    CGPoint position = CGPointZero;
+    NSNumber *num_buffer = (NSNumber*)[definition objectForKey:@"X"];
+    position.x = num_buffer.intValue;
+    num_buffer = (NSNumber*)[definition objectForKey:@"Y"];
+    position.y = num_buffer.intValue;
+    
+    [prop setPosition:position];
+    int targetY = position.y-(prop.contentSize.height/2) - ((prop.contentSize.height/2) + (target.contentSize.height/2));
+    CGPoint targetPosition = ccp(position.x, targetY);
+    [target setPosition:targetPosition];
+    [decoy setPosition:targetPosition];
+    
+    CGRect margin = CGRectZero;
+    NSDictionary *margin_cfg = [definition objectForKey:@"Margin"];
+    num_buffer = (NSNumber*)[margin_cfg objectForKey:@"X"];
+    margin.origin.x = num_buffer.intValue;
+    num_buffer = (NSNumber*)[margin_cfg objectForKey:@"Y"];
+    margin.origin.y = num_buffer.intValue;
+    num_buffer = (NSNumber*)[margin_cfg objectForKey:@"Width"];
+    margin.size.width = num_buffer.intValue;
+    num_buffer = (NSNumber*)[margin_cfg objectForKey:@"Height"];
+    margin.size.height = num_buffer.intValue;
+    
+    int maskX = position.x - (prop.contentSize.width/2)+(margin.origin.x);
+    int maskY = position.y - (prop.contentSize.height/2)+(margin.origin.y);
+    CGRect mask = CGRectMake(maskX, maskY, (prop.contentSize.width-margin.size.width), 
+                             (prop.contentSize.height-margin.size.height) );
+    [target setMask:mask];
+    [target setEnableMask:YES];
+    [decoy setMask:mask];
+    [decoy setEnableMask:YES];
+    TargetLayer* layer = [[TargetLayer alloc] initWithProp:prop target:target andDecoy:decoy];
+    return layer;
+}
+
 -(void) onEnter
 {
     [super onEnter];
