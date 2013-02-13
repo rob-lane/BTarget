@@ -211,4 +211,23 @@ static EventManager* _sharedEventManager;
 
 @end
 
+@implementation TargetEvent
+
+@synthesize destroyed;
+@synthesize animating;
+@synthesize decoy;
+@synthesize bullseye;
+
+-(id) getType
+{
+    return [TargetEvent getTypeId];
+}
+
++(id) getTypeId {
+    return (id)[NSString stringWithFormat:@"touch"];
+}
+
+
+@end
+
 

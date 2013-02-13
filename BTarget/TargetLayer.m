@@ -16,6 +16,8 @@
 -(CCSprite*) loadAnimationWithName:(NSString*)name frameCount:(int)count delay:(float) time thatRepeats:(BOOL) repeats;
 -(CCSprite*) randomSpriteForDisplay;
 -(CGPoint) randomDirectionForSprite;
+-(void) processTargetEvent:(TargetEvent*)event;
+-(void) processTouchEvent:(TouchEvent*)event;
 @end
 
 @implementation TargetLayer (hidden)
@@ -123,7 +125,66 @@
     return _targetDirection;
 }
 
+-(void) processTargetEvent:(TargetEvent *)event
+{
+    
+}
 
+-(void) processTouchEvent:(TouchEvent *)event
+{
+    UITouch *touch = event.touch;
+    CGPoint location = [[self parent] convertTouchToNodeSpace:touch];
+    BTargetSprite *sprite = (_isDecoy ? _decoy : _target);
+    if ([sprite doesPointCollide:location] && _animDictionary)
+    {
+        TargetEvent *te = [[TargetEvent alloc] init];
+        te.destroyed = YES;
+        te.animating = YES;
+        te.decoy = te.bullseye = NO;
+        [_showAction stop];
+        if (_isDecoy) {
+            te.decoy = YES;
+            CCAction *action = [_animDictionary objectForKey:@"smiley_touch"];
+            [sprite setVisible:NO];
+            [_decoyAnimation setVisible:YES];
+            [_decoyAnimation setPosition:location];
+            [_decoyAnimation runAction:action];
+            _destroyed = YES;
+            id waitAction = [CCDelayTime actionWithDuration:2];
+            id hideAnim = [CCMoveTo actionWithDuration:15 position:location];
+            CCAction *sequence = [CCSequence actions:waitAction, hideAnim, nil];
+            [_decoyAnimation runAction:sequence];
+        }
+        else {
+            CCAction *action = nil;
+            CCSprite *anim_sprite = nil;
+            if ([_target isPointBullseye:location]) {
+                te.bullseye = YES;
+                action = [_animDictionary objectForKey:@"be"];
+                anim_sprite = _bullseyeAnimation;
+                _bullseyeHit = YES;
+            }
+            else {
+                action = [_animDictionary objectForKey:@"he"]; 
+                anim_sprite = _hitAnimation;
+                anim_sprite.position = location;
+                _bullseyeHit = NO;
+            }
+            if (action && anim_sprite)
+            {
+                [anim_sprite setVisible:YES];
+                [anim_sprite runAction:action];
+                [_target setVisible:NO];
+                id endAction = [CCCallFunc actionWithTarget:self selector:@selector(showActionsEnded)];
+                [_target runAction:endAction];
+                CCFadeOut* fadeExplosion = [CCFadeOut actionWithDuration:1.0f];
+                [anim_sprite runAction:fadeExplosion];
+                _destroyed = YES;
+            }
+        }
+        [[EventManager sharedEventManager] queueEvent:(Protocol<Event>*)te];
+    } 
+}
 
 @end
 
@@ -221,6 +282,7 @@
 {
     [super onEnter];
     [[EventManager sharedEventManager] registerResponder:(Protocol<EventListener>*)self forTypeId:[TouchEvent getTypeId]];
+    [[EventManager sharedEventManager] registerResponder:(Protocol<EventListener>*)self forTypeId:[TargetEvent getTypeId]];
 }
 
 -(void) dealloc
@@ -315,51 +377,8 @@
 {
     if ([event isKindOfClass:[TouchEvent class]]) {
         TouchEvent *te = (TouchEvent*)event;
-        UITouch *touch = te.touch;
-        CGPoint location = [[self parent] convertTouchToNodeSpace:touch];
-        BTargetSprite *sprite = (_isDecoy ? _decoy : _target);
-        if ([sprite doesPointCollide:location] && _animDictionary)
-        {
-            [_showAction stop];
-            if (_isDecoy) {
-                CCAction *action = [_animDictionary objectForKey:@"smiley_touch"];
-                [sprite setVisible:NO];
-                [_decoyAnimation setVisible:YES];
-                [_decoyAnimation setPosition:location];
-                [_decoyAnimation runAction:action];
-                _destroyed = YES;
-                id waitAction = [CCDelayTime actionWithDuration:2];
-                id hideAnim = [CCMoveTo actionWithDuration:15 position:location];
-                CCAction *sequence = [CCSequence actions:waitAction, hideAnim, nil];
-                [_decoyAnimation runAction:sequence];
-            }
-            else {
-                CCAction *action = nil;
-                CCSprite *anim_sprite = nil;
-                if ([_target isPointBullseye:location]) {
-                    action = [_animDictionary objectForKey:@"be"];
-                    anim_sprite = _bullseyeAnimation;
-                    _bullseyeHit = YES;
-                }
-                else {
-                    action = [_animDictionary objectForKey:@"he"]; 
-                    anim_sprite = _hitAnimation;
-                    anim_sprite.position = location;
-                    _bullseyeHit = NO;
-                }
-                if (action && anim_sprite)
-                {
-                    [anim_sprite setVisible:YES];
-                    [anim_sprite runAction:action];
-                    [_target setVisible:NO];
-                    id endAction = [CCCallFunc actionWithTarget:self selector:@selector(showActionsEnded)];
-                    [_target runAction:endAction];
-                    CCFadeOut* fadeExplosion = [CCFadeOut actionWithDuration:1.0f];
-                    [anim_sprite runAction:fadeExplosion];
-                    _destroyed = YES;
-                }
-            }
-        }
+        [self processTouchEvent:te];
+        
         
     }
     

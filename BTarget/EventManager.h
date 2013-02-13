@@ -62,3 +62,12 @@ typedef Protocol<EventListener> EventListener;
 
 @end
 
+@interface TargetEvent : NSObject <Event>
+
+@property (assign) BOOL destroyed;
+@property (assign) BOOL bullseye;
+@property (assign) BOOL animating;
+@property (assign) BOOL decoy;
+
+@end
+
